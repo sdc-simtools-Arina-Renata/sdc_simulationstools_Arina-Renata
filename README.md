@@ -1,109 +1,110 @@
 # Projektidee – Therapieplätze & Wartezeiten (Monte-Carlo-Modell)
-# Stand: 2024 – Region Nordbayern
-________________________________________________________________
-# Thema
+# Therapy Waiting Time Simulation using SimPy
 
-Analyse der Versorgungssituation im Bereich psychologischer Psychotherapie in Nordbayern und Simulation der Wartezeiten auf Therapieplätze im Jahr 2024.
+## Project Overview
+This repository contains a **discrete-event simulation model** for analyzing  
+**waiting times and capacity constraints in a psychotherapeutic care system**.
 
-________________________________________________________________
+The simulation is implemented using **SimPy** and models:
+- patient arrivals with growing demand
+- limited therapy capacity (resources)
+- patients who drop out before starting therapy
+- realistic therapy durations
+- waiting queues and waiting times
 
-# Problemstellung
+The main objective is to study the impact of **undersupply** on waiting times over multiple years.
+he project analyzes **waiting times and capacity constraints in a healthcare system**, focusing on therapy slots, patient arrivals, and demand growth.  
+---
 
-Die Versorgung mit ambulanten psychotherapeutischen Leistungen ist regional stark begrenzt. 
-In vielen Städten und Landkreisen treten:
-	•	lange Wartezeiten (mehrere Wochen bis Monate),
-	•	Versorgungsengpässe,
-	•	Ungleichgewicht zwischen Nachfrage und verfügbaren Therapieplätzen,
-	•	und fehlende oder unzureichende Maßnahmen zur Verkürzung der Wartezeit
-auf.
+## Target Repository Structure (Lecture-Oriented)
 
-Diese Situation stellt sowohl für Betroffene als auch für die Gesundheitsversorgung eine hohe Belastung dar.
+## Repository Structure
+ MONTECARLO_project
+┣  data
+┃ ┣  raw          
+┃ ┣  interim      
+┃ ┗  processed    
+┣  environment    # Environment configuration (e.g. virtual env, setup files)
+┣  figures        
+┣  notebooks      # Jupyter notebooks for analysis and exploration
+┃ ┣  Final_01.ipynb
+┃ ┣  warteschlange.ipynb
+┃ ┗  view_*.ipynb # Iterative analysis notebooks
+┣  README_files   # Assets for rendered README (HTML support files)
+┃ ┗  libs
+┣  reports
+┃ ┗  ABOUTME.txt  # Project description / report notes
+┣  src            
+┣  test           
+┣  README.md      # Main project documentation
+┣  README.html    
+┗  .gitignore
 
-________________________________________________________________
+---
 
-# Modellansatz (Monte-Carlo-Simulation)
+## Simulation Model (Summary)
 
-Zur Analyse wird ein Warteschlangensystem modelliert:
+### Objective
+To evaluate how **capacity limitations and demand growth** affect:
+- waiting times
+- system congestion
+- risk of extreme delays
 
-Systemkomponenten
-	•	Ankünfte: neue Patient*innen, die einen Therapieplatz suchen
-	•	Behandlungsdauer: Länge der Therapie (z. B. 10–60 Sitzungen; wird als Zufallsvariable modelliert)
-	•	Kapazität: verfügbare Sitzungen pro Woche
-	•	Anzahl Therapeut*innen × Stunden pro Woche
-	•	Auslastung: niedrig, mittel, hoch
-	•	Wartezeit = Zeitspanne zwischen Erstkontakt und Therapiebeginn
+in a therapy-based healthcare system.
 
-Zielgrößen
-	•	Wie wahrscheinlich ist eine Wartezeit
-	•	über 3 Monate?
-	•	über 6 Monate?
-	•	Wie entwickelt sich der Rückstau („Warteliste“) im Jahresverlauf?
+---
 
-Simulationslauf
-	•	Ein Simulationslauf entspricht einem Zeitraum von 1 Jahr (365 Tage)
-	•	Durch Wiederholung vieler Läufe entsteht eine Monte-Carlo-Verteilung der Wartezeiten
+### Time Model
+- **Time unit:** weeks  
+- **Simulation horizon:** multiple years  
+- **Therapy duration:** fixed number of sessions, adjusted for working weeks  
+- **Warm-up phase:** system starts fully occupied to avoid initial bias
 
-________________________________________________________________
+---
 
-# Annahmen / Recherchebasis
+### Demand Model
+- Patient arrivals follow a **Poisson process**
+- Only a fraction of arrivals actually start therapy
+- Demand increases continuously over time (growth rate)
 
-Für das Modell werden recherchiert, geschätzt oder aus Quellen abgeleitet:
-	•	Anzahl der Psychotherapeut*innen pro Region
-	•	Kapazität pro Therapeut*in (z. B. 20–30 Therapie-Stunden/Woche)
-	•	durchschnittliche Therapiedauer (z. B. 20–60 Sitzungen)
-	•	Anzahl der wöchentlichen Neuanmeldungen
-	•	Auslastung (in vielen Regionen > 90 %)
-	•	Therapieabbruchsrate (optional)
+---
 
-Diese Werte werden als Parameter im Modell festgelegt.
+### Capacity Model
+- Therapy capacity is modeled as a **limited resource**
+- Capacity is derived from:
+  - theoretical staff availability
+  - break-even calculations
+  - scenario-specific efficiency adjustments
+- Undersupply scenarios intentionally create waiting queues
 
-________________________________________________________________
+---
 
-# Faktoren / Merkmale
+### Output Metrics
+The simulation records and evaluates:
+- number of patients starting therapy
+- average waiting time
+- median waiting time
+- 90th percentile waiting time
+- maximum waiting time
 
-Für die Interpretation können zusätzliche Faktoren berücksichtigt werden:
-	•	Krankenkassenstatus
-(gesetzlich vs. privat → oft große Unterschiede in Wartezeit und Platzverfügbarkeit)
-	•	Betroffene Gruppen
-z. B. Erwachsene, Jugendliche, Notfälle
+---
 
-Diese Faktoren fließen optional in Szenarien oder Diskussion ein.
+## Notebooks
 
-________________________________________________________________
+The `notebooks/` folder contains:
+- exploratory analysis notebooks
+- intermediate visualizations
+- final evaluation notebooks used for reporting
 
-# Bedingungen / Szenarien
+`Final_01.ipynb` represents the consolidated final analysis.
 
-Für die Simulation können unterschiedliche Szenarien aufgebaut werden:
+---
 
-Szenario A – Status quo
-	•	aktuelle Kapazität und Nachfrage
-	•	Präsenztherapie, 1:1-Behandlung
+## Installation & Usage
 
-Szenario B – Kapazitätserhöhung
-	•	mehr Therapeut*innen oder mehr Stunden/Woche
+### Requirements
+- Python ≥ 3.9
 
-Szenario C – Kürzere Therapiedauer
-	•	durchschnittliche Sitzungszahl sinkt (z. B. -10 %)
-
-Szenario D – Kombination
-	•	mehr Kapazität + effizientere Abläufe
-
-Szenario E – Digitale Therapie / Hybrid
-	•	zusätzliche Online-Sitzungen als Kapazitätserweiterung
-
-Diese Szenarien werden per Monte-Carlo simuliert und verglichen.
-
-________________________________________________________________
-
-# Kurzfazit der Projektidee
-
-Die Projektarbeit untersucht, wie gut die psychotherapeutische Versorgung in Nordbayern die Nachfrage abdeckt und wie lange Patient*innen realistisch auf einen Therapieplatz warten.
-Mit einem Monte-Carlo-Warteschlangenmodell werden Wartezeiten simuliert, Engpässe sichtbar gemacht und mögliche Maßnahmen bewertet, die zu einer Verkürzung der Wartezeiten führen können.
-
-
-
-
-
-- bullet
-# hi / Überschrift
-bvxh
+### Install dependencies
+```bash
+pip install numpy simpy jupyter
