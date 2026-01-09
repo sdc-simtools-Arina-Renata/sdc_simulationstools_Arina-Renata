@@ -17,18 +17,22 @@ he project analyzes **waiting times and capacity constraints in a healthcare sys
 ---
 
 ## Repository Structure
- MONTECARLO_project
-┣  data    
-┣  environment    # Environment configuration (e.g. virtual env, setup files)       
-┣  notebooks      # Jupyter notebooks for analysis and exploration
-┃ ┗ Final_01.ipynb
-┣  README_files/libs   # Assets for rendered README (HTML support files)
-┣  reports
-┃ ┗  ABOUTME.txt  # Project description / report notes                     
-┣  README.md      # Main project documentation
-┣  README.html    
-┗  .gitignore
 
+```text
+MONTECARLO_project
+├── data
+├── environment               # Environment configuration (e.g. virtual env, setup files)
+├── notebooks                 # Jupyter notebooks for analysis and exploration
+│   └── Final_01.ipynb
+├── README_files              
+│   └── libs                  # Assets for rendered README (HTML support files)
+├── reports
+│   └── ABOUTME.txt           # Project description / report notes
+├── README.md                 # Main project documentation
+├── README.html
+└── .gitignore
+
+```
 ---
 
 ## Simulation Model (Summary)
