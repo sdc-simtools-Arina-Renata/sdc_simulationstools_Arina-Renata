@@ -16,25 +16,15 @@ The main objective is to study the impact of **undersupply** on waiting times ov
 he project analyzes **waiting times and capacity constraints in a healthcare system**, focusing on therapy slots, patient arrivals, and demand growth.  
 ---
 
-## Target Repository Structure (Lecture-Oriented)
-
 ## Repository Structure
  MONTECARLO_project
-┣  data
-┃ ┣  raw          
-┃ ┣  interim      
-┃ ┗  processed    
-┣  environment    # Environment configuration (e.g. virtual env, setup files)
-┣  figures        
+┣  data    
+┣  environment    # Environment configuration (e.g. virtual env, setup files)       
 ┣  notebooks      # Jupyter notebooks for analysis and exploration
-┃ ┣  Final_01.ipynb
-┃ ┗  view_*.ipynb # Iterative analysis notebooks
-┣  README_files   # Assets for rendered README (HTML support files)
-┃ ┗  libs
+┃ ┗ Final_01.ipynb
+┣  README_files/libs   # Assets for rendered README (HTML support files)
 ┣  reports
-┃ ┗  ABOUTME.txt  # Project description / report notes
-┣  src            
-┣  test           
+┃ ┗  ABOUTME.txt  # Project description / report notes                     
 ┣  README.md      # Main project documentation
 ┣  README.html    
 ┗  .gitignore
@@ -55,8 +45,8 @@ in a therapy-based healthcare system.
 
 ### Time Model
 - **Time unit:** weeks  
-- **Simulation horizon:** multiple years  
-- **Therapy duration:** fixed number of sessions, adjusted for working weeks  
+- **Simulation horizon:** 3 years  
+- **Therapy duration:** 30 weeks (adjusted for working weeks) 
 - **Warm-up phase:** system starts fully occupied to avoid initial bias
 
 ---
@@ -89,11 +79,6 @@ The simulation records and evaluates:
 ---
 
 ## Notebooks
-
-The `notebooks/` folder contains:
-- exploratory analysis notebooks
-- intermediate visualizations
-- final evaluation notebooks used for reporting
 
 `Final_01.ipynb` represents the consolidated final analysis.
 
