@@ -28,7 +28,6 @@ he project analyzes **waiting times and capacity constraints in a healthcare sys
 ┣  figures        
 ┣  notebooks      # Jupyter notebooks for analysis and exploration
 ┃ ┣  Final_01.ipynb
-┃ ┣  warteschlange.ipynb
 ┃ ┗  view_*.ipynb # Iterative analysis notebooks
 ┣  README_files   # Assets for rendered README (HTML support files)
 ┃ ┗  libs
